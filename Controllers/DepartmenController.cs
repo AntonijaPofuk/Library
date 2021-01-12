@@ -16,7 +16,7 @@ namespace Library.Controllers
         // GET: api/Departmen
         public IEnumerable<Departmen> Get()
         {
-            return db.Departmens.AsEnumerable();
+            return db.Departmen.AsEnumerable();
         }    
 
         // GET: api/Departmen/5
