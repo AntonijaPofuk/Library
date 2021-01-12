@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Library.Models
 {
-	public class Departmens
+	public class Department
 	{
         public int ID { get; set; }
         public string Name { get; set; }
