@@ -24,7 +24,7 @@ namespace Library.Controllers
                 {
                     cmd.CommandType = CommandType.Text;
                     da.Fill(table);
-                }
+                }                                             
                 return Request.CreateResponse(HttpStatusCode.OK, table);
             }
         }
