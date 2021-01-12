@@ -1,7 +1,6 @@
 ﻿@{
     ViewBag.Title = "Welcome";
 }
-
 <style>
     table, tr, td, th {
         border: 1px solid #ccc;
@@ -9,23 +8,38 @@
         margin: 10px;
     }
 </style>
-<h2>Welcome to Sibeesh Passion's Email List</h2>
+<h2>Departmens List</h2>
 <body data-ng-app="APIModule">
     <div id="tblSubs" ng-controller="APIController">
         <table>
             <tr>
                 <th>ID</th>
-                <th>Email ID</th>
-                <th>Subscribed Date</th>
+                <th>Name</th>
+                <th>City</th>
+                <th></th>
             </tr>
             <tbody data-ng-repeat="sub in subscriber">
                 <tr>
                     <td>{{sub.ID}}</td>
-                    <td>{{sub.Name}}</td>
+                    <td ng-blur="updSubscriber(sub,$event)" ng-dblclick="makeEditable($event)">{{sub.Name}} </td>
                     <td>{{sub.City}}</td>
+                    <td>
+                        <input type="button" id="Delete" value="Delete" data-ng-click="deleteDepart(sub.ID)" />
+                        <button type="button" class="btn btn-xs" ng-click="editDialog.open(sub)">Edit...</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+
+        <h4>Insert new department</h4>
+        <div class="form-group">
+            <label for="departname">Name:</label>
+            <input type="text" class="form-control" id="departname" placeholder="Enter name" [required="string" ] data-ng-model="departname" />
+            <label for="departcity">City:</label>
+            <input type="text" class="form-control" id="departcity" placeholder="Enter city" [required="string" ] data-ng-model="departcity" />
+        </div>
+        <button type="button" class="btn btn-default" data-ng-click="saveSubs();">Submit</button>
+        <button type="button" class="btn btn-xs" ng-click="addDialog.open()">Add new department</button>
     </div>
 </body>
 <script src="~/Scripts/angular.js"></script>
