@@ -17,10 +17,10 @@ namespace Library.Controllers
         // GET: api/Departmen
         public IEnumerable<Departmen> Get()
         {
-            return db.Departmen.AsEnumerable();
+            return db.Departmens.AsEnumerable();
         }    
 
-        // GET: api/Departmen/5
+        // GET: api/Departmen/id
         public string Get(int id)
         {
             return "value";
@@ -31,12 +31,12 @@ namespace Library.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Departmen.Add(sub);
+                db.Departmens.Add(sub);
                 db.SaveChanges();
             }
         }
 
-        // PUT: api/Departmen/5
+        // PUT: api/Departmen/id
         public void Put(Departmen sub)
         {
             if (ModelState.IsValid)
@@ -53,15 +53,15 @@ namespace Library.Controllers
             }
         }
 
-        // DELETE: api/Departmen/5
+        // DELETE: api/Departmen/id
         public void Delete(int id)
         {
-            Departmen dlt = db.Departmen.Find(id);
+            Departmen dlt = db.Departmens.Find(id);
             if (dlt != null)
             {
                 try
                 {
-                    db.Departmen.Remove(dlt);
+                    db.Departmens.Remove(dlt);
                     db.SaveChanges();
                 }
                 catch (Exception)

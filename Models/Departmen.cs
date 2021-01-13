@@ -14,8 +14,17 @@ namespace Library.Models
     
     public partial class Departmen
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Departmen()
+        {
+            this.Books = new HashSet<Book>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public string City { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

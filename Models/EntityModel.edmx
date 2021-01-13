@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LibraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LibraryDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Books">
           <Key>
             <PropertyRef Name="ID" />
@@ -13,7 +13,7 @@
           <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Author" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Year" Type="int" Nullable="false" />
-          <Property Name="Numbers" Type="int" Nullable="false" />
+          <Property Name="Department" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Departmens">
           <Key>
@@ -23,22 +23,38 @@
           <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="City" Type="varchar" MaxLength="255" />
         </EntityType>
-        <EntityType Name="Employee">
+        <EntityType Name="sysdiagrams">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="diagram_id" />
           </Key>
-          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="LastName" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="FirstName" Type="varchar" MaxLength="255" />
-          <Property Name="Age" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_Books_Departmens">
+          <End Role="Departmens" Type="Self.Departmens" Multiplicity="1" />
+          <End Role="Books" Type="Self.Books" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departmens">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Books">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="LibraryDBModelStoreContainer">
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departmens" EntityType="Self.Departmens" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Books_Departmens" Association="Self.FK_Books_Departmens">
+            <End Role="Departmens" EntitySet="Departmens" />
+            <End Role="Books" EntitySet="Books" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LibraryDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -50,7 +66,8 @@
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Author" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Year" Type="Int32" Nullable="false" />
-          <Property Name="Numbers" Type="Int32" Nullable="false" />
+          <Property Name="Department" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departmen" Relationship="LibraryDBModel.FK_Books_Departmens" FromRole="Book" ToRole="Departmen" />
         </EntityType>
         <EntityType Name="Departmen">
           <Key>
@@ -59,21 +76,39 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Age" Type="Int32" />
+          <NavigationProperty Name="Books" Relationship="LibraryDBModel.FK_Books_Departmens" FromRole="Departmen" ToRole="Book" />
         </EntityType>
         <EntityContainer Name="LibraryDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Books" EntityType="Self.Book" />
           <EntitySet Name="Departmens" EntityType="Self.Departmen" />
-          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="sysdiagrams" EntityType="LibraryDBModel.sysdiagram" />
+          <AssociationSet Name="FK_Books_Departmens" Association="LibraryDBModel.FK_Books_Departmens">
+            <End Role="Departmen" EntitySet="Departmens" />
+            <End Role="Book" EntitySet="Books" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Books_Departmens">
+          <End Type="LibraryDBModel.Departmen" Role="Departmen" Multiplicity="1" />
+          <End Type="LibraryDBModel.Book" Role="Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departmen">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Department" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -83,11 +118,11 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="LibraryDBModel.Book">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Department" ColumnName="Department" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
-                <ScalarProperty Name="Numbers" ColumnName="Numbers" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -100,13 +135,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="LibraryDBModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LibraryDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

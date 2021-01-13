@@ -18,6 +18,8 @@ namespace Library.Models
         public LibraryDBEntities()
             : base("name=LibraryDBEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -26,6 +28,7 @@ namespace Library.Models
         }
     
         public virtual DbSet<Book> Books { get; set; }
-        public virtual DbSet<Departmen> Departmen { get; set; }
+        public virtual DbSet<Departmen> Departmens { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

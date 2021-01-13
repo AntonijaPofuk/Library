@@ -12,16 +12,12 @@ namespace Library.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Book
+    public partial class sysdiagram
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Author { get; set; }
-        public int Year { get; set; }
-        public int Department { get; set; }
-    
-        public virtual Departmen Departmen { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

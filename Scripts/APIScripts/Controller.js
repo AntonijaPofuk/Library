@@ -1,10 +1,9 @@
-﻿app.controller('APIController', function ($scope, APIService, editDialog, addDialog) {
-    getAll();   
+﻿app.controller('APIController', function ($scope, $log, APIService, editDialog, addDialog) {
+
+    getAll();  
 
     $scope.editDialog = editDialog;
-    $scope.addDialog = addDialog;
-
-  
+    $scope.addDialog = addDialog; 
 
     function getAll() {
         var servCall = APIService.getSubs();
@@ -12,10 +11,11 @@
             $scope.subscriber = d.data;
         }, function (error) {
             $log.error('Oops! Something went wrong while fetching the data.')
-        })
+        } 
+        );
     }
 
-    $scope.saveSubs = function () {
+     $scope.saveSubs = function () {
         var sub = {
             Name: $scope.departname,
             City: $scope.departcity
@@ -28,6 +28,7 @@
         })
     };
 
+   
     $scope.makeEditable = function (obj) {
         obj.target.setAttribute("contenteditable", true);
         obj.target.focus();

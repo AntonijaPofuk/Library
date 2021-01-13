@@ -1,7 +1,8 @@
 ﻿app.service("APIService", function ($http) {
+
     this.getSubs = function () {
         return $http.get("api/Departmen")
-    }.catch(angular.noop);
+    };
 
     this.saveSubscriber = function (sub) {
         return $http(
@@ -28,5 +29,37 @@
                 data: ID,
                 url: url
             });
-    }  
+    } 
+
+    this.getBooks = function () {
+        return $http.get("api/Book")
+    };
+
+    this.saveBooks = function (book) {
+        return $http(
+            {
+                method: 'post',
+                data: book,
+                url: 'api/Book'
+            });
+    }
+
+    this.updateBook = function (book) {
+        return $http(
+            {
+                method: 'put',
+                data: book,
+                url: 'api/Book'
+            });
+    }
+    this.deleteBook = function (ID) {
+        var url = 'api/Book/' + ID;
+        return $http(
+            {
+                method: 'delete',
+                data: ID,
+                url: url
+            });
+    } 
+
 }); 
