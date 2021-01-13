@@ -1,7 +1,7 @@
 ﻿app.service("APIService", function ($http) {
     this.getSubs = function () {
         return $http.get("api/Departmen")
-    }
+    }.catch(angular.noop);
 
     this.saveSubscriber = function (sub) {
         return $http(

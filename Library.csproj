@@ -184,9 +184,6 @@
     <Compile Include="Models\Departmen.cs">
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Employee.cs">
-      <DependentUpon>EntityModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\EntityModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

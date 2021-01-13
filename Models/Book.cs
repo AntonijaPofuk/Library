@@ -18,6 +18,6 @@ namespace Library.Models
         public string Name { get; set; }
         public string Author { get; set; }
         public int Year { get; set; }
-        public int Numbers { get; set; }
+        public int Department { get; set; }
     }
 }

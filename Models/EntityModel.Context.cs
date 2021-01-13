@@ -27,6 +27,5 @@ namespace Library.Models
     
         public virtual DbSet<Book> Books { get; set; }
         public virtual DbSet<Departmen> Departmen { get; set; }
-        public virtual DbSet<Employee> Employees { get; set; }
     }
 }
