@@ -8,6 +8,12 @@
         padding: 10px;
         margin: 10px;
     }
+
+    .selected {
+        background-color: black;
+        color: white;
+        font-weight: bold;
+    }
 </style>
 
 <h2>Departmens List</h2>
@@ -20,18 +26,20 @@
                 <th>City</th>
                 <th><span class="glyphicon glyphicon-wrench"></span></th>
             </tr>
-            <tbody data-ng-repeat="sub in subscriber">
+            <tbody data-ng-repeat="sub in subscriber" ng-class="{'selected':$index == selectedRow}" ng-click="setClickedRow($index)">
                 <tr>
                     <td>{{sub.ID}}</td>
                     <td ng-blur="updSubscriber(sub,$event)" ng-dblclick="makeEditable($event)">{{sub.Name}} </td>
                     <td>{{sub.City}}</td>
                     <td>
                         <input type="button" class="btn btn-danger btn-xs" id="Delete" value="Delete" data-ng-click="deleteDepart(sub.ID)" />
+                        <input type="button" class="btn btn-info btn-xs" id="GetBooksByDepart" value="Get" data-ng-click="getBooksByDepart(sub.ID)" />
                         <button type="button" class="btn btn-success btn-xs" ng-click="editDialog.open(sub)">Edit...</button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        Selected value is: {{selectedRow}}
         <h4>Insert new department</h4>
         <div class="form-group">
             <label for="departname">Name:</label>
@@ -73,13 +81,37 @@
             <label for="bookyear">Year:</label>
             <input type="text" class="form-control" id="bookyear" placeholder="Enter year" [required="string" ] data-ng-model="bookyear" />
             <label for="bookdepart">Department:</label>
-                <select  class="form-control" data-ng-model="bookdepart" id="bookdepart">
-                    <option  class="form-control" data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x.ID}}">{{x.Name}}</option>
-                </select>
-
+            <select class="form-control" data-ng-model="bookdepart" id="bookdepart">
+                <option class="form-control" data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x.ID}}">{{x.Name}}</option>
+            </select>
         </div>
         <button type="button" class="btn btn-success btn-sm" data-ng-click="saveBooks();">Submit</button>
         <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new book</button>
+
+
+        <div>
+            <select ng-model="showGroup" ng-options="c.Name for c in subscriber">
+                <option value="">-- choose color --</option>
+            </select>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Author</th>
+                    <th>Year</th>
+                    <th>Department</th>
+                </tr>
+                <tr ng-repeat="book_filter in book_v | filter:showGroup.ID">
+                    <td>{{book_filter.Name}}</td>
+                    <td>{{book_filter.Author}}</td>
+                    <td>{{book_filter.Year}} </td>
+                    <td>{{book_filter.Department}}</td>
+                </tr>
+            </table>
+        </div>
+
+
+
+
 
     </div>
 </body>

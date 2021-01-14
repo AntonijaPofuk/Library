@@ -18,11 +18,10 @@
         );
     }
 
-   $scope.departs = [
-        { Name: "Ford Mustang", color: "red" },
-        { Name: "Fiat 500", color: "white" },
-        { Name: "Volvo XC90", color: "black" }
-    ];
+    $scope.selectedRow = null;  // initialize our variable to null
+    $scope.setClickedRow = function (index) {  //function that sets the value of selectedRow to current index
+        $scope.selectedRow = index;
+    }
 
     function getAllBooks() {
         var servCall = APIService.getBooks();
