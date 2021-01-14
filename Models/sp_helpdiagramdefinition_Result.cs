@@ -10,16 +10,10 @@
 namespace Library.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Book
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public string Author { get; set; }
-        public int Year { get; set; }
-        public int Department { get; set; }
-    
-        public virtual Departmen Departmen { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }
