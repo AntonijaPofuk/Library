@@ -1,4 +1,4 @@
-﻿app.controller('APIController', function ($scope, $log, APIService, editDialog, editBookDialog, addDialog) {
+﻿app.controller('APIController', function ($scope, $log, $filter, APIService, $window, editDialog, editBookDialog, addDialog) {
 
     getAll();
     getAllBooks();
@@ -21,6 +21,13 @@
     $scope.selectedRow = null;  // initialize our variable to null
     $scope.setClickedRow = function (index) {  //function that sets the value of selectedRow to current index
         $scope.selectedRow = index;
+    }
+
+
+    $scope.idSelected = null;
+    $scope.setSelected = function (idSelected) {
+        $scope.idSelected = idSelected;
+        console.log(idSelected);
     }
 
     function getAllBooks() {
@@ -127,7 +134,6 @@ app.factory('editDialog', ['$rootScope', '$compile', '$window', function ($rootS
 app.factory('editBookDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
     var html = '<edit-book sub="sub"></edit-book>';
     var link = $compile(html); 
-
     return {
         open: function (sub) {
             var scope = $rootScope.$new(true);
@@ -169,6 +175,25 @@ app.directive('editPerson', [function () {
     };
 }]);
 
+app.directive('addPerson', [function () {
+    return {
+        restrict: 'E',
+        scope: {
+            sub: '=',
+        },
+        template: `<h4>Insert new department</h4>
+                <div class="form-group">
+                    <label for="departname">Name:</label>
+                    <input type="text" class="form-control" id="departname" placeholder="Enter name" [required="string" ] data-ng-model="departname" />
+                    <label for="departcity">City:</label>
+                    <input type="text" class="form-control" id="departcity" placeholder="Enter city" [required="string" ] data-ng-model="departcity" />
+                </div>
+                <button type="button" class="btn btn-success btn-sm" data-ng-click="saveSubs();">Submit</button>
+                <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new department</button>
+`,
+    };
+}]);
+
 app.directive('editBook', [function () {
     return {
         restrict: 'E',
@@ -190,21 +215,3 @@ app.directive('editBook', [function () {
    `, };
 }]);
 
-app.directive('addPerson', [function () {
-    return {
-        restrict: 'E',
-        scope: {
-            sub: '=',
-        },
-        template: ` 
-            <h4>Insert new department</h4>
-        <div class="form-group">
-            <label for="departname">Name:</label>
-            <input type="text" class="form-control" id="departname" placeholder="Enter name" [required="string" ] data-ng-model="departname" />
-            <label for="departcity">City:</label>
-            <input type="text" class="form-control" id="departcity" placeholder="Enter city" [required="string" ] data-ng-model="departcity" />
-        </div>
-        <button type="button" class="btn btn-default" data-ng-click="saveSubs();">Submit</button>
-`,
-    };
-}]);
