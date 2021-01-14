@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Welcome";
 }
 <style>
@@ -8,6 +9,7 @@
         margin: 10px;
     }
 </style>
+
 <h2>Departmens List</h2>
 <body data-ng-app="APIModule">
     <div id="tblSubs" ng-controller="APIController">
@@ -71,12 +73,13 @@
             <label for="bookyear">Year:</label>
             <input type="text" class="form-control" id="bookyear" placeholder="Enter year" [required="string" ] data-ng-model="bookyear" />
             <label for="bookdepart">Department:</label>
-            <input type="text" class="form-control" id="bookdepart" placeholder="Enter department" [required="string" ] data-ng-model="bookdepart" />
+                <select  class="form-control" data-ng-model="bookdepart" id="bookdepart">
+                    <option  class="form-control" data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x.ID}}">{{x.Name}}</option>
+                </select>
 
         </div>
         <button type="button" class="btn btn-success btn-sm" data-ng-click="saveBooks();">Submit</button>
         <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new book</button>
-
 
     </div>
 </body>
