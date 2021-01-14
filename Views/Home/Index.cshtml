@@ -38,7 +38,46 @@
             <input type="text" class="form-control" id="departcity" placeholder="Enter city" [required="string" ] data-ng-model="departcity" />
         </div>
         <button type="button" class="btn btn-success btn-sm" data-ng-click="saveSubs();">Submit</button>
-      <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new department</button>
+        <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new department</button>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Author</th>
+                <th>Year</th>
+                <th>Department</th>
+                <th><span class="glyphicon glyphicon-wrench"></span></th>
+            </tr>
+            <tbody data-ng-repeat="sub in book_v">
+                <tr>
+                    <td>{{sub.ID}}</td>
+                    <td>{{sub.Name}} </td>
+                    <td>{{sub.Author}}</td>
+                    <td>{{sub.Year}} </td>
+                    <td>{{sub.Department}}</td>
+                    <td>
+                        <input type="button" class="btn btn-danger btn-xs" id="Delete" value="Delete" data-ng-click="deleteBook(sub.ID)" />
+                        <button type="button" class="btn btn-success btn-xs" ng-click="editBookDialog.open(sub)">Edit...</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h4>Insert new book</h4>
+        <div class="form-group">
+            <label for="bookname">Name:</label>
+            <input type="text" class="form-control" id="bookname" placeholder="Enter name" [required="string" ] data-ng-model="bookname" />
+            <label for="bookauthor">Author:</label>
+            <input type="text" class="form-control" id="bookauthor" placeholder="Enter author" [required="string" ] data-ng-model="bookauthor" />
+            <label for="bookyear">Year:</label>
+            <input type="text" class="form-control" id="bookyear" placeholder="Enter year" [required="string" ] data-ng-model="bookyear" />
+            <label for="bookdepart">Department:</label>
+            <input type="text" class="form-control" id="bookdepart" placeholder="Enter department" [required="string" ] data-ng-model="bookdepart" />
+
+        </div>
+        <button type="button" class="btn btn-success btn-sm" data-ng-click="saveBooks();">Submit</button>
+        <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new book</button>
+
+
     </div>
 </body>
 <script src="~/Scripts/angular.js"></script>

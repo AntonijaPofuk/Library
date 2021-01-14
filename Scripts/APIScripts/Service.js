@@ -13,6 +13,15 @@
             });
     }   
 
+    this.saveBooksPost = function (sub) {
+        return $http(
+            {
+                method: 'post',
+                data: sub,
+                url: 'api/Book'
+            });
+    }
+
     this.updateSubscriber = function (sub) {
         return $http(
             {
@@ -35,14 +44,7 @@
         return $http.get("api/Book")
     };
 
-    this.saveBooks = function (book) {
-        return $http(
-            {
-                method: 'post',
-                data: book,
-                url: 'api/Book'
-            });
-    }
+
 
     this.updateBook = function (book) {
         return $http(
