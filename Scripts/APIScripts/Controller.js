@@ -2,10 +2,8 @@
 
     getAll();
     getAllBooks();
-
     $scope.editDialog = editDialog;
     $scope.editBookDialog = editBookDialog;
-
     $scope.addDialog = addDialog;     
 
     function getAll() {
@@ -90,18 +88,18 @@
         dlt.then(function (d) {
             getAll();
         }, function (error) {
-            console.log('Oops! Something went wrong while deleting the data.')
+            console.log('Oops! Something went wrong while deleting the departmen data.')
         })
     }; 
     
-        $scope.deleteBook = function (ID) {
-        var dlt = APIService.deleteBook(ID);
-        dlt.then(function (d) {
-            getAllBooks();
-        }, function (error) {
-            console.log('Oops! Something went wrong while deleting the data.')
-        })
-    };   
+    $scope.deleteBook = function (ID) {
+    var dlt = APIService.deleteBook(ID);
+    dlt.then(function (d) {
+        getAllBooks();
+    }, function (error) {
+        console.log('Oops! Something went wrong while deleting the book data.')
+    })
+};   
 
     $scope.data = {
         singleSelect: null,
