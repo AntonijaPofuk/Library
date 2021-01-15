@@ -1,10 +1,11 @@
-﻿app.controller('APIController', function ($scope, $log, $filter, APIService, $window, editDialog, editBookDialog, addDialog) {
+﻿app.controller('APIController', function ($scope, $log, $filter, APIService, $window, editDialog, editBookDialog, addDialog, addBookDialog) {
 
     getAll();
     getAllBooks();
     $scope.editDialog = editDialog;
     $scope.editBookDialog = editBookDialog;
     $scope.addDialog = addDialog;     
+    $scope.addBookDialog = addBookDialog;
 
     function getAll() {
         var servCall = APIService.getSubs();
@@ -46,6 +47,7 @@
         var saveSubs = APIService.saveSubscriber(sub);
         saveSubs.then(function (d) {
             getAll();
+            console.log('Wee! We saved department data.')
         }, function (error) {
             console.log('Oops! Something went wrong while saving the department data.')
         })
@@ -62,6 +64,7 @@
         var saveBooks = APIService.saveBooksPost(sub);
         saveBooks.then(function (d) {
             getAllBooks();
+            console.log('Wee! We saved book data.')
         }, function (error) {
             console.log('Oops! Something went wrong while saving the book data.')
         })
@@ -73,45 +76,44 @@
         obj.target.focus();
     };  
 
-    $scope.updSubscriber = function (sub, eve) {
+    $scope.updDepartOnClick = function (sub, eve) {
         sub.Name = eve.currentTarget.innerText;
         var upd = APIService.updateSubscriber(sub);
         upd.then(function (d) {
             getAll();
+            console.log('Wee! We updated department data.')
         }, function (error) {
             console.log('Oops! Something went wrong while updating the department data.')
         })
     }; 
-
-    
+        
     $scope.updBookOnClick = function (sub, eve) {
         sub.Name = eve.currentTarget.innerText;
         var upd = APIService.updateBook(sub);
         upd.then(function (d) {
             getAllBooks();
+            console.log('Wee! We updated book data.')
         }, function (error) {
             console.log('Oops! Something went wrong while updating the department data.')
         })
     }; 
-
-
 
     $scope.updDepart= function (sub) {
         var upd = APIService.updateSubscriber(sub);
         upd.then(function (d) {
             getAll();
+            console.log('Wee! We updated department data.')
         }, function (error) {
             console.log('Oops! Something went wrong while updating the department data.')
         })
     }; 
 
-
-    $scope.updBooks = function (sub) {
+    $scope.updBook= function (sub) {
         var upd = APIService.updateBook(sub);
         upd.then(function (d) {
-            getAllBooks();
+            console.log('Wee! We updated book data.')
         }, function (error) {
-            console.log('Oops! Something went wrong while updating the book data.')
+            console.log('Oops! Something went wrong while updating the books data.'+error)
         })
     }; 
 
@@ -120,6 +122,7 @@
         var dlt = APIService.deleteDepart(ID);
         dlt.then(function (d) {
             getAll();
+            console.log('Wee! We deleted department data.')
         }, function (error) {
             console.log('Oops! Something went wrong while deleting the departmen data.')
         })
@@ -129,10 +132,11 @@
     var dlt = APIService.deleteBook(ID);
     dlt.then(function (d) {
         getAllBooks();
+        console.log('Wee! We deleted book data.')
     }, function (error) {
         console.log('Oops! Something went wrong while deleting the book data.')
     })
-};   
+    };   
 
    
 })  
@@ -171,6 +175,22 @@ app.directive('editPerson', [function () {
 }]);
 
 
+app.factory('editBookDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
+    var html = '<edit-book sub="sub"></edit-book>';
+    var link = $compile(html);
+    return {
+        open: function (sub) {
+            var scope = $rootScope.$new(true);
+            scope.sub = sub;
+            var w = $window.open('', '_blank', 'toolbar=0,width=300,height=200');
+            link(scope, function (cloned, scope) {
+                angular.element(w.document.body).append(cloned);
+            });
+        }
+    };
+}]);
+
+
 app.directive('editBook', [function () {
     return {
         restrict: 'E',
@@ -188,30 +208,15 @@ app.directive('editBook', [function () {
                      <select ng-model="selectedDeparts">
                     <option data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x}}">{{x.Name}}</option>
                     </select>  
-                <button type="button" class="btn btn-success btn-sm" data-ng-click="updBooks(sub);">Submit</button>
-
+                <button type="button" class="btn btn-success btn-sm" data-ng-click="updBook(sub);">Submit</button>
                     </div>
    `,
     };
 }]);
 
-app.factory('editBookDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
-    var html = '<edit-book sub="sub"></edit-book>';
-    var link = $compile(html); 
-    return {
-        open: function (sub) {
-            var scope = $rootScope.$new(true);
-            scope.sub = sub;
-            var w = $window.open('', '_blank', 'toolbar=0,width=300,height=200');
-            link(scope, function (cloned, scope) {
-                angular.element(w.document.body).append(cloned);
-            });
-        }
-    };
-}]);
 
 app.factory('addDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
-    var html = '<add-person sub="sub"></add-person>';
+    var html = '<add-department sub="sub"></add-department>';
     var link = $compile(html); 
     return {
         open: function (sub) {
@@ -225,21 +230,62 @@ app.factory('addDialog', ['$rootScope', '$compile', '$window', function ($rootSc
     };
 }]);
 
-app.directive('addPerson', [function () {
+app.directive('addDepartment', [function () {
     return {
         restrict: 'E',
         scope: {
             sub: '=',
         },
-        template: `<h4>Insert new department</h4>
-                <div class="form-group">
+        template: ` 
+                <h4>Insert new department</h4>
+                <div ng-controller="APIController" class="form-group">
                     <label for="departname">Name:</label>
                     <input type="text" class="form-control" id="departname" placeholder="Enter name" [required="string" ] data-ng-model="departname" />
                     <label for="departcity">City:</label>
                     <input type="text" class="form-control" id="departcity" placeholder="Enter city" [required="string" ] data-ng-model="departcity" />
-                </div>
-                <button type="button" class="btn btn-success btn-sm" data-ng-click="saveSubs();">Submit</button>
-                <button type="button" class="btn btn-success btn-sm" ng-click="addDialog.open()">Add new department</button>
+                <button type="button" class="btn btn-success btn-xs" data-ng-click="saveSubs();">Submit</button>
+            </div>
+`,
+    };
+}]);
+
+
+app.factory('addBookDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
+    var html = '<add-book sub="sub"></add-book>';
+    var link = $compile(html);
+    return {
+        open: function (sub) {
+            var scope = $rootScope.$new(true);
+            scope.sub = sub;
+            var w = $window.open('', '_blank', 'toolbar=0,width=300,height=200');
+            link(scope, function (cloned, scope) {
+                angular.element(w.document.body).append(cloned);
+            });
+        }
+    };
+}]);
+
+app.directive('addBook', [function () {
+    return {
+        restrict: 'E',
+        scope: {
+            sub: '=',
+        },
+        template: ` 
+                <h4>Insert new book</h4>
+                <div class="form-group" ng-controller="APIController">
+                    <label for="bookname">Name:</label>
+                    <input type="text" class="form-control" id="bookname" placeholder="Enter name" [required="string" ] data-ng-model="bookname" />
+                    <label for="bookauthor">Author:</label>
+                    <input type="text" class="form-control" id="bookauthor" placeholder="Enter author" [required="string" ] data-ng-model="bookauthor" />
+                    <label for="bookyear">Year:</label>
+                    <input type="text" class="form-control" id="bookyear" placeholder="Enter year" [required="string" ] data-ng-model="bookyear" />
+                    <label for="bookdepart">Department:</label>
+                    <select class="form-control" data-ng-model="bookdepart" id="bookdepart">
+                        <option class="form-control" data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x.ID}}">{{x.Name}}</option>
+                    </select>
+                <button type="button" class="btn btn-success btn-xs" data-ng-click="saveBooks();">Submit</button>
+            </div>
 `,
     };
 }]);

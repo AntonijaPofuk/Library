@@ -31,7 +31,7 @@
                     <tbody data-ng-repeat="sub in subscriber" ng-click="setSelected(sub.ID)" ng-class="{selected : sub.ID === idSelected}">
                         <tr>
                             <td>{{sub.ID}}</td>
-                            <td ng-blur="updSubscriber(sub,$event)" ng-dblclick="makeEditable($event)">{{sub.Name}} </td>
+                            <td ng-blur="updDepartOnClick(sub,$event)" ng-dblclick="makeEditable($event)">{{sub.Name}} </td>
                             <td>{{sub.City}}</td>
                             <td>
                                 <input type="button" class="btn btn-danger btn-sm" id="Delete" value="Delete" data-ng-click="deleteDepart(sub.ID)" />
@@ -85,7 +85,7 @@
                     </select>
                 </div>
                 <button type="button" class="btn btn-success btn-xs" data-ng-click="saveBooks();">Submit</button>
-                <button type="button" class="btn btn-success btn-xs" ng-click="addDialog.open()">Add new book</button>
+                <button type="button" class="btn btn-success btn-xs" ng-click="addBookDialog.open()">Add new book</button>
             </div>
         </div>
     </div>
