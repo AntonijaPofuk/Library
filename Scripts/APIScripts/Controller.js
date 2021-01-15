@@ -79,9 +79,42 @@
         upd.then(function (d) {
             getAll();
         }, function (error) {
-            console.log('Oops! Something went wrong while updating the data.')
+            console.log('Oops! Something went wrong while updating the department data.')
         })
     }; 
+
+    
+    $scope.updBookOnClick = function (sub, eve) {
+        sub.Name = eve.currentTarget.innerText;
+        var upd = APIService.updateBook(sub);
+        upd.then(function (d) {
+            getAllBooks();
+        }, function (error) {
+            console.log('Oops! Something went wrong while updating the department data.')
+        })
+    }; 
+
+
+
+    $scope.updDepart= function (sub) {
+        var upd = APIService.updateSubscriber(sub);
+        upd.then(function (d) {
+            getAll();
+        }, function (error) {
+            console.log('Oops! Something went wrong while updating the department data.')
+        })
+    }; 
+
+
+    $scope.updBooks = function (sub) {
+        var upd = APIService.updateBook(sub);
+        upd.then(function (d) {
+            getAllBooks();
+        }, function (error) {
+            console.log('Oops! Something went wrong while updating the book data.')
+        })
+    }; 
+
 
     $scope.deleteDepart = function (ID) {
         var dlt = APIService.deleteDepart(ID);
@@ -101,17 +134,7 @@
     })
 };   
 
-    $scope.data = {
-        singleSelect: null,
-        multipleSelect: [],
-        option1: 'option-1'
-    };
-
-    $scope.forceUnknownOption = function () {
-        $scope.data.singleSelect = 'nonsense';
-    };
-
-    
+   
 })  
 
 app.factory('editDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
@@ -126,6 +149,49 @@ app.factory('editDialog', ['$rootScope', '$compile', '$window', function ($rootS
                 angular.element(w.document.body).append(cloned);
             });
         }
+    };
+}]);
+
+
+app.directive('editPerson', [function () {
+    return {
+        restrict: 'E',
+        scope: {
+            sub: '=',
+        },
+        template: `
+                    <div id="tblSubs" ng-controller="APIController">
+                    <p>Identificator<input readonly class="form-control" type="text" ng-model="sub.ID"></p> 
+                    <p>Name <input class="form-control" type="text" ng-model="sub.Name"></p>  
+                  <p>City <input class="form-control" type="text" ng-model="sub.City"></p>
+                <button type="button" class="btn btn-success btn-sm" data-ng-click="updDepart(sub);">Submit</button>
+                </div>
+`,
+    };
+}]);
+
+
+app.directive('editBook', [function () {
+    return {
+        restrict: 'E',
+        scope: {
+            sub: '=',
+        },
+        template: `
+                    <div id="tblSubs" ng-controller="APIController">          
+                    <p>Identificator<input readonly class="form-control" type="text" ng-model="sub.ID"></p> 
+                    <p>Name <input class="form-control" type="text" ng-model="sub.Name"></p>  
+                    <p>Author <input class="form-control" type="text" ng-model="sub.Author"></p>
+                    <p>Year <input class="form-control" type="text" ng-model="sub.Year"></p>                   
+                     Departmen: {{sub.Department=selectedDeparts.ID}}
+                    <p>Select a department:</p>                 
+                     <select ng-model="selectedDeparts">
+                    <option data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x}}">{{x.Name}}</option>
+                    </select>  
+                <button type="button" class="btn btn-success btn-sm" data-ng-click="updBooks(sub);">Submit</button>
+
+                    </div>
+   `,
     };
 }]);
 
@@ -159,20 +225,6 @@ app.factory('addDialog', ['$rootScope', '$compile', '$window', function ($rootSc
     };
 }]);
 
-
-app.directive('editPerson', [function () {
-    return {
-        restrict: 'E',
-        scope: {
-            sub: '=',
-        },
-        template: `<p>Identificator<input readonly class="form-control" type="text" ng-model="sub.ID"></p> 
-                    <p>Name <input class="form-control" type="text" ng-model="sub.Name"></p>  
-                  <p>City <input class="form-control" type="text" ng-model="sub.City"></p>   
-`,
-    };
-}]);
-
 app.directive('addPerson', [function () {
     return {
         restrict: 'E',
@@ -192,24 +244,5 @@ app.directive('addPerson', [function () {
     };
 }]);
 
-app.directive('editBook', [function () {
-    return {
-        restrict: 'E',
-        scope: {
-            sub: '=',
-        },
-        template: `
-                    <div ng-app="app" ng-controller="APIController">
-                    <p>Identificator<input readonly class="form-control" type="text" ng-model="sub.ID"></p> 
-                    <p>Name <input class="form-control" type="text" ng-model="sub.Name"></p>  
-                    <p>Author <input class="form-control" type="text" ng-model="sub.Author"></p>
-                    <p>Year <input class="form-control" type="text" ng-model="sub.Year"></p>                   
-                     Departmen: {{sub.Department=selectedDeparts.ID}}
-                    <p>Select a department:</p>                 
-                     <select ng-model="selectedDeparts">
-                    <option data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x}}">{{x.Name}}</option>
-                    </select>    
-                    </div>
-   `, };
-}]);
+
 

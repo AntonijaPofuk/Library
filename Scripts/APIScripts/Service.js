@@ -44,8 +44,6 @@
         return $http.get("api/Book")
     };
 
-
-
     this.updateBook = function (book) {
         return $http(
             {
