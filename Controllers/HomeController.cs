@@ -14,10 +14,15 @@ namespace Library.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
-        {
-            ViewBag.Title = "Home Page";
+        private LibraryDBEntities db = new LibraryDBEntities();
 
+        public ActionResult Index(int? searchString)
+        {
+            
+                var viewModel = new ViewModels.DepartmentViewModel();
+                viewModel.Books = db.Books.Where(b => b.Year > searchString);
+           
+            ViewBag.Title = "Home Page";
 
             //Prototype
             PrototypeCalling();
@@ -46,7 +51,7 @@ namespace Library.Controllers
             //Mediator
             MediatorCalling();
 
-            return View();
+            return View(viewModel);
 
             void CommandCalling()
             {

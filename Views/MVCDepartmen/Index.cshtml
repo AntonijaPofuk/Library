@@ -1,12 +1,8 @@
 ﻿@model  Library.ViewModels.DepartmentViewModel
-
-
 @{
     ViewBag.Title = "Departmens";
 }
-
 <h2>Index</h2>
-
 <p>
     @Html.ActionLink("Create New Department", "Create")
 </p>
@@ -22,7 +18,6 @@
         <th>
             City
         </th>
-
     </tr>
 
     @foreach (var item in Model.Departments)
@@ -45,10 +40,8 @@
     <td>
         @item.City
     </td>
-
 </tr>
     }
-
 </table>
 
 @if (Model.Books != null)
@@ -70,9 +63,7 @@
             <th>
                 Department
             </th>
-
         </tr>
-
         @foreach (var item in Model.Books)
         {
             <tr>
@@ -91,9 +82,7 @@
                 <td>
                     @item.Department
                 </td>
-
             </tr>
         }
-
     </table>
 }

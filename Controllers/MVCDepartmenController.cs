@@ -14,23 +14,19 @@ namespace Library.Controllers
     public class MVCDepartmenController : Controller
     {
         private LibraryDBEntities db = new LibraryDBEntities();
-
      
         // GET: MVCDepartmen
         public ActionResult Index(int? deptID)
         {
             var viewModel = new DepartmentViewModel();
-            viewModel.Departments = db.Departmens.OrderBy(d=>d.ID);
+            viewModel.Departments = db.Departmens.Include("Books").OrderBy(d=>d.ID);
             viewModel.Books = db.Books.OrderBy(d => d.ID);
-
-
             if (deptID != null)
             {
                 ViewBag.ID = deptID.Value;
                 viewModel.Books = viewModel.Departments.Where(
                     x => x.ID == deptID).Single().Books;
             }
-
             var departmens = db.Departmens;           
             return View(viewModel);
         }

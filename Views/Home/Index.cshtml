@@ -65,12 +65,13 @@
                         <td ng-blur="updBookOnClick(book_filter,$event)" ng-dblclick="makeEditable($event)">{{book_filter.Name}}</td>
                         <td>{{book_filter.Author}}</td>
                         <td>{{book_filter.Year}} </td>
-                        <td>{{book_filter.Department}}</td>                       
+                        <td>{{book_filter.Department}}</td>
                         <td>
                             <input type="button" class="btn btn-danger btn-sm" id="Delete" value="Delete" data-ng-click="deleteBook(book_filter.ID)" />
-                            <button type="button" class="btn btn-success btn-sm" ng-click="editBookDialog.open(book_filter)">Edit...</button></td>
+                            <button type="button" class="btn btn-success btn-sm" ng-click="editBookDialog.open(book_filter)">Edit...</button>
+                        </td>
                     </tr>
-                </table>      
+                </table>
                 <h4>Insert new book</h4>
                 <div class="form-group">
                     <label for="bookname">Name:</label>
@@ -87,6 +88,42 @@
                 <button type="button" class="btn btn-success btn-xs" data-ng-click="saveBooks();">Submit</button>
                 <button type="button" class="btn btn-success btn-xs" ng-click="addBookDialog.open()">Add new book</button>
             </div>
+        </div>
+        <div class="col-sm-12">
+            @using (Html.BeginForm())
+            {
+                <p>
+                    Find by name: @Html.TextBox("SearchString")
+                    <input class="btn btn-danger btn-sm" type="submit" value="Search" />
+                </p>
+            }
+            <table>
+            <tr>               
+                <th>
+                    Name
+                </th>
+                <th>
+                    Author
+                </th>
+                <th>
+                    Year
+                </th>              
+            </tr>
+            @foreach (var item in Model.Books)
+            {
+                <tr>                   
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Author
+                    </td>
+                    <td>
+                        @item.Year
+                    </td>                  
+                </tr>
+            }
+            </table>
         </div>
     </div>
 </body>

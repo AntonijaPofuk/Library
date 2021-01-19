@@ -14,21 +14,20 @@
     @RenderSection("scripts", required: false)
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/bootstrap.min.js"></script>
+    @Scripts.Render("~/Scripts/bootstrap.js")
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"> @Html.ActionLink("Library.com", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
                 <li class="nav-link"> @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
                 <li class="nav-link">@Html.ActionLink("Departmens", "Index", "MVCDepartmen")</li>
                 <li class="nav-link">@Html.ActionLink("Books", "Index", "MVCBooks")</li>
-
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
