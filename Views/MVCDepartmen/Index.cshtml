@@ -8,10 +8,14 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Department", "Create")
 </p>
 <table class="table">
     <tr>
+        <th></th>
+        <th>
+            ID
+        </th>
         <th>
             Name
         </th>
@@ -23,40 +27,73 @@
 
     @foreach (var item in Model.Departments)
     {
-        <tr>
-            <td>
-                @item.Name
-            </td>
-            <td>
-            </td>
+        string selectedRow = "";
+        if (item.ID == ViewBag.deptID)
+        {
+            selectedRow = "success";
+        }
+<tr class="@selectedRow">
+    <td>
+        @Html.ActionLink("Select", "Index", new { deptID = item.ID })
+    </td>
+    <td>
+        @item.ID
+    </td>
+    <td>
+        @item.Name
+    </td>
+    <td>
+        @item.City
+    </td>
 
-        </tr>
+</tr>
     }
 
 </table>
 
-
-<table class="table">
-    <tr>
-        <th>
-            Name
-        </th>
-        <th>
-            City
-        </th>
-
-    </tr>
-
-    @foreach (var item in Model.Books)
-    {
+@if (Model.Books != null)
+{
+    <table class="table">
         <tr>
-            <td>
-                @item.Author
-            </td>
-            <td>
-            </td>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Year
+            </th>
+            <th>
+                Department
+            </th>
 
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model.Books)
+        {
+            <tr>
+                <td>
+                    @item.ID
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.Author
+                </td>
+                <td>
+                    @item.Year
+                </td>
+                <td>
+                    @item.Department
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}
