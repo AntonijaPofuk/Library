@@ -23,9 +23,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto"> 
+            <ul class="navbar-nav mr-auto">
                 <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                <li class="nav-link"> @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>            
+                <li class="nav-link"> @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                <li class="nav-link">@Html.ActionLink("Departmens", "Index", "MVCDepartmen")</li>
+                <li class="nav-link">@Html.ActionLink("Books", "Index", "MVCBooks")</li>
+
             </ul>
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

@@ -1,0 +1,62 @@
+﻿@model  Library.ViewModels.DepartmentViewModel
+
+
+@{
+    ViewBag.Title = "Departmens";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            City
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Departments)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            City
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model.Books)
+    {
+        <tr>
+            <td>
+                @item.Author
+            </td>
+            <td>
+            </td>
+
+        </tr>
+    }
+
+</table>

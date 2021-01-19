@@ -21,5 +21,8 @@ namespace Library.Models
         public int Department { get; set; }
     
         public virtual Departmen Departmen { get; set; }
+
+        public ICollection<Book> Books { get; set; }
+
     }
 }

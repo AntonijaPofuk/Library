@@ -48,10 +48,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -179,6 +179,8 @@
     <Compile Include="Controllers\DepartmenController.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MVCBooksController.cs" />
+    <Compile Include="Controllers\MVCDepartmenController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DesignPatterns\Adapter.cs" />
     <Compile Include="DesignPatterns\Builder.cs" />
@@ -224,6 +226,7 @@
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DepartmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -1082,10 +1085,21 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\MVCDepartmen\Create.cshtml" />
+    <Content Include="Views\MVCDepartmen\Delete.cshtml" />
+    <Content Include="Views\MVCDepartmen\Details.cshtml" />
+    <Content Include="Views\MVCDepartmen\Edit.cshtml" />
+    <Content Include="Views\MVCDepartmen\Index.cshtml" />
+    <Content Include="Views\MVCBooks\Create.cshtml" />
+    <Content Include="Views\MVCBooks\Delete.cshtml" />
+    <Content Include="Views\MVCBooks\Details.cshtml" />
+    <Content Include="Views\MVCBooks\Edit.cshtml" />
+    <Content Include="Views\MVCBooks\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\DebugLogger\" />
+    <Folder Include="Views\DepartmentData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
