@@ -73,75 +73,79 @@
                     </tr>
                 </table>
                 <h4>Insert new book</h4>
-                <div class="form-group">
+                <form class="form-group" name="bookForm">
                     <label for="bookname">Name:</label>
-                    <input type="text" class="form-control" id="bookname" placeholder="Enter name" [required="string" ] data-ng-model="bookname" />
+                    <input required name="bookname" type="text" class="form-control" id="bookname" placeholder="Enter name" [required="string" ] data-ng-model="bookname" />
+                    <div style="color:red" ng-show="bookForm.bookname.$dirty && bookForm.bookname.$invalid">
+                        <span ng-show="bookForm.bookname.$error.required">Name is required.</span>
+                    </div>
                     <label for="bookauthor">Author:</label>
-                    <input type="text" class="form-control" id="bookauthor" placeholder="Enter author" [required="string" ] data-ng-model="bookauthor" />
+                    <input required name="bookauthor" type="text" class="form-control" id="bookauthor" placeholder="Enter author" [required="string" ] data-ng-model="bookauthor" />
+                    <div style="color:red" ng-show="bookForm.bookauthor.$dirty && bookForm.bookauthor.$invalid">
+                        <span ng-show="bookForm.bookauthor.$error.required">Author is required.</span>
+                    </div>
                     <label for="bookyear">Year:</label>
-                    <input type="text" class="form-control" id="bookyear" placeholder="Enter year" [required="string" ] data-ng-model="bookyear" />
+                    <input required name="bookyear" type="number" class="form-control" id="bookyear" placeholder="Enter year" [required="string" ] data-ng-model="bookyear" />
+                    <div style="color:red" ng-show="bookForm.bookyear.$dirty && bookForm.bookyear.$invalid">
+                        <span ng-show="bookForm.bookyear.$error.required">Year is required.</span>
+                        <span ng-show="bookForm.bookyear.email">Invalid year.</span>
+                    </div>
                     <label for="bookdepart">Department:</label>
-                    <select class="form-control" data-ng-model="bookdepart" id="bookdepart">
+                    <select required class="form-control" data-ng-model="bookdepart" id="bookdepart">
                         <option class="form-control" data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x.ID}}">{{x.Name}}</option>
                     </select>
-                </div>
-                <button type="button" class="btn btn-success btn-xs" data-ng-click="saveBooks();">Submit</button>
+                    <button type="button" class="btn btn-success btn-xs" ng-click="reset()">Reset</button>
+                </form>
+                <button ng-disabled=" bookForm.bookname.$invalid && bookForm.bookname.$untouched
+                        || bookForm.bookauthor.$untouched && bookForm.bookauthor.$invalid
+                        || bookForm.bookyear.$untouched && bookForm.bookyear.$invalid
+                        || bookForm.sub.Department.$untouched" type="button" class="btn btn-success btn-xs" data-ng-click="saveBooks();">
+                    Submit
+                </button>
                 <button type="button" class="btn btn-success btn-xs" ng-click="addBookDialog.open()">Add new book</button>
             </div>
         </div>
-        <div class="col-sm-12">
+        @*<div class="col-sm-12">
             @using (Html.BeginForm())
             {
-                <p>
-                    Find by name: @Html.TextBox("SearchString")
-                    <input class="btn btn-danger btn-sm" type="submit" value="Search" />
-                </p>
+                <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
             }
             <table>
                 <tr>
                     <th>
                         Name
-                    </th>
-                    <th>
-                        Author
-                    </th>
-                    <th>
-                        Year
-                    </th>
+                    </th>                  
                 </tr>
                 @foreach (var item in Model.Books)
                 {
                     <tr>
                         <td>
                             @item.Name
-                        </td>
-                        <td>
-                            @item.Author
-                        </td>
-                        <td>
-                            @item.Year
-                        </td>
+                        </td>                       
                     </tr>
                 }
             </table>
-        </div>
+        </div>*@
 
-        <div class="col-sm-12">
-            <input type="number" class="form-control" placeholder="Input value here" ng-model="priceterm" />
-            <table class="table">
-                <tr ng-repeat="b in book_v|valueGreaterThan:priceterm">
-                    <td>
-                        {{b.Name}}
-                    </td>
-                    <td>
-                        {{b.Author}}
-                    </td>
-                    <td>
-                        {{b.Year}}
-                    </td>
-                </tr>
-            </table>           
-        </div>
+    <div class="col-sm-12">
+        <input type="number" class="form-control" placeholder="Input year here" ng-model="priceterm" />
+        <label>Any: <input ng-model="search.$"></label> <br>
+        <label>Name only <input ng-model="search.Name"></label><br>
+        <label>Author only <input ng-model="search.Author"></label><br>            
+        <table class="table">
+            <tr ng-repeat="b in book_v|valueGreaterThan:priceterm |filter : search:strict">
+                <td>
+                    {{b.Name}}
+                </td>
+                <td>
+                    {{b.Author}}
+                </td>
+                <td>
+                    {{b.Year}}
+                </td>
+            </tr>
+        </table>
+    </div>
     </div>
 </body>
 <script src="~/Scripts/angular.js"></script>

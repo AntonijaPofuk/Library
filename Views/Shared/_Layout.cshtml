@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="APIModule">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +16,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/bootstrap.js")
 </head>
-<body>
+<body  ng-controller="APIController">
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -30,7 +30,7 @@
                 <li class="nav-link">@Html.ActionLink("Books", "Index", "MVCBooks")</li>
             </ul>
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  ng-model="search.$">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>

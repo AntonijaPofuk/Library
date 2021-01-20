@@ -7,6 +7,15 @@
     $scope.addDialog = addDialog;     
     $scope.addBookDialog = addBookDialog;
 
+    $scope.reset = function () {
+        $scope.bookname = "";
+        $scope.bookauthor = "";
+        $scope.bookyear = "";
+
+    }
+
+    $scope.reset();
+
     function getAll() {
         var servCall = APIService.getSubs();
         servCall.then(function (d) {
