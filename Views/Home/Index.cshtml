@@ -98,32 +98,49 @@
                 </p>
             }
             <table>
-            <tr>               
-                <th>
-                    Name
-                </th>
-                <th>
-                    Author
-                </th>
-                <th>
-                    Year
-                </th>              
-            </tr>
-            @foreach (var item in Model.Books)
-            {
-                <tr>                   
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.Author
-                    </td>
-                    <td>
-                        @item.Year
-                    </td>                  
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Author
+                    </th>
+                    <th>
+                        Year
+                    </th>
                 </tr>
-            }
+                @foreach (var item in Model.Books)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Author
+                        </td>
+                        <td>
+                            @item.Year
+                        </td>
+                    </tr>
+                }
             </table>
+        </div>
+
+        <div class="col-sm-12">
+            <input type="number" class="form-control" placeholder="Input value here" ng-model="priceterm" />
+            <table class="table">
+                <tr ng-repeat="b in book_v|valueGreaterThan:priceterm">
+                    <td>
+                        {{b.Name}}
+                    </td>
+                    <td>
+                        {{b.Author}}
+                    </td>
+                    <td>
+                        {{b.Year}}
+                    </td>
+                </tr>
+            </table>           
         </div>
     </div>
 </body>
