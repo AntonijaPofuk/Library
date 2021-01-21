@@ -5,42 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <link href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="https://kendo.cdn.telerik.com/2020.3.1118/styles/kendo.default.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
-    <script src="https://kendo.cdn.telerik.com/2020.3.1118/js/kendo.all.min.js"></script>
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/Scripts/bootstrap.js")
+    @Styles.Render("~/Content/css")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
+    <script src="~/Scripts/APIScripts/Module.js"></script>
+    <script src="~/Scripts/APIScripts/Service.js"></script>
+    <script src="~/Scripts/APIScripts/Controller.js"></script>
+
 </head>
-<body  ng-controller="APIController">
-    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-        <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="collapsibleNavbar">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                <li class="nav-link"> @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
-                <li class="nav-link">@Html.ActionLink("Departmens", "Index", "MVCDepartmen")</li>
-                <li class="nav-link">@Html.ActionLink("Books", "Index", "MVCBooks")</li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  ng-model="search.$">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="nav">
+                    <a href="#home" class="button">Home</a>
+
+                    <a href="#about" class="button">About</a>
+
+                </div>
+            </div>
         </div>
-    </nav>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>    
+    </div>
+
+    <div class="container">
+        <div ng-view=""></div>
+    </div>
+
+    <div ng-controller="APIController">
+        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+            <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li class="nav-link"> @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</li>
+                    <li class="nav-link">@Html.ActionLink("Departmens", "Index", "MVCDepartmen")</li>
+                    <li class="nav-link">@Html.ActionLink("Books", "Index", "MVCBooks")</li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" ng-model="search.$">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </nav>
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            </footer>
+        </div>
+    </div>
 </body>
 </html>

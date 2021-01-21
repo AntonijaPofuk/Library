@@ -15,9 +15,13 @@
         font-weight: bold;
     }
 </style>
+<script>
 
+</script>
 <body data-ng-app="APIModule">
     <div id="tblSubs" ng-controller="APIController">
+
+
         <div class="row">
             <div class="col-sm-6">
                 <h2>Departmens list</h2>
@@ -106,50 +110,45 @@
             </div>
         </div>
         @*<div class="col-sm-12">
-            @using (Html.BeginForm())
-            {
-                <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
-            }
-            <table>
-                <tr>
-                    <th>
-                        Name
-                    </th>                  
-                </tr>
-                @foreach (var item in Model.Books)
+                @using (Html.BeginForm())
                 {
-                    <tr>
-                        <td>
-                            @item.Name
-                        </td>                       
-                    </tr>
+                    <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
                 }
-            </table>
-        </div>*@
+                <table>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Books)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>*@
 
-    <div class="col-sm-12">
-        <input type="number" class="form-control" placeholder="Input year here" ng-model="priceterm" />
-        <label>Any: <input ng-model="search.$"></label> <br>
-        <label>Name only <input ng-model="search.Name"></label><br>
-        <label>Author only <input ng-model="search.Author"></label><br>            
-        <table class="table">
-            <tr ng-repeat="b in book_v|valueGreaterThan:priceterm |filter : search:strict">
-                <td>
-                    {{b.Name}}
-                </td>
-                <td>
-                    {{b.Author}}
-                </td>
-                <td>
-                    {{b.Year}}
-                </td>
-            </tr>
-        </table>
-    </div>
+        <div class="col-sm-12">
+            <input type="number" class="form-control" placeholder="Input year here" ng-model="priceterm" />
+            <label>Any: <input ng-model="search.$"></label> <br>
+            <label>Name only <input ng-model="search.Name"></label><br>
+            <label>Author only <input ng-model="search.Author"></label><br>
+            <table class="table">
+                <tr ng-repeat="b in book_v|valueGreaterThan:priceterm |filter : search:strict">
+                    <td>
+                        {{b.Name}}
+                    </td>
+                    <td>
+                        {{b.Author}}
+                    </td>
+                    <td>
+                        {{b.Year}}
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
 </body>
-<script src="~/Scripts/angular.js"></script>
-<script src="~/Scripts/angular-route.js"></script>
-<script src="~/Scripts/APIScripts/Module.js"></script>
-<script src="~/Scripts/APIScripts/Service.js"></script>
-<script src="~/Scripts/APIScripts/Controller.js"></script>   
