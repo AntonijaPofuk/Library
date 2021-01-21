@@ -1,17 +1,16 @@
-﻿app.config(['$routeProvider', function ($routeProvider) {
-
+﻿app.config(function ($routeProvider) {
+    var mypath = 'http:localhost/testapp/'
     $routeProvider.
         when('/home', {
-            template: `<h2>by</h2>`,
             controller: 'HomeController',
-            controllerAs: 'homeCtrl'
+            templateUrl: './Scripts/Pages/home.html'
         }).
         when('/about', {
-            template: `<h2>Hello</h2>`,
+            templateUrl: './Scripts/Pages/about.html',
             controller: 'AboutController',
             controllerAs: 'AboutCtrl'
         });
-}])
+})
 
 app.controller('HomeController', function () {
     console.log('2. HomeController loaded!');

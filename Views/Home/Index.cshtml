@@ -20,7 +20,22 @@
 </script>
 <body data-ng-app="APIModule">
     <div id="tblSubs" ng-controller="APIController">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="nav">
+                        <a href="#home" class="button">Home</a>
 
+                        <a href="#about" class="button">Back</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div ng-view=""></div>
+        </div>
 
         <div class="row">
             <div class="col-sm-6">
@@ -110,26 +125,26 @@
             </div>
         </div>
         @*<div class="col-sm-12">
-                @using (Html.BeginForm())
+            @using (Html.BeginForm())
+            {
+                <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
+            }
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                </tr>
+                @foreach (var item in Model.Books)
                 {
-                    <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
-                }
-                <table>
                     <tr>
-                        <th>
-                            Name
-                        </th>
+                        <td>
+                            @item.Name
+                        </td>
                     </tr>
-                    @foreach (var item in Model.Books)
-                    {
-                        <tr>
-                            <td>
-                                @item.Name
-                            </td>
-                        </tr>
-                    }
-                </table>
-            </div>*@
+                }
+            </table>
+        </div>*@
 
         <div class="col-sm-12">
             <input type="number" class="form-control" placeholder="Input year here" ng-model="priceterm" />

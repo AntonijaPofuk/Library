@@ -16,23 +16,6 @@
 
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="nav">
-                    <a href="#home" class="button">Home</a>
-
-                    <a href="#about" class="button">About</a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div ng-view=""></div>
-    </div>
-
     <div ng-controller="APIController">
         <nav class="navbar navbar-expand-md bg-dark navbar-dark">
             <li class="nav-link">@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
