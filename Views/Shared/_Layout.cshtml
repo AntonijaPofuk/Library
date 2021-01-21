@@ -4,15 +4,25 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewBag.Title</title>
+    <!--JQuery-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.3.min.js"></script>
+    <!--Bootstrap-->
     @Scripts.Render("~/Scripts/bootstrap.js")
+    <!--CSS-->
     @Styles.Render("~/Content/css")
+    <!--AngularJs-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.29/angular-ui-router.min.js"></script>
+    <!--Js-->
     <script src="~/Scripts/APIScripts/Module.js"></script>
     <script src="~/Scripts/APIScripts/Service.js"></script>
-    <script src="~/Scripts/APIScripts/Controller.js"></script>
+    <script src="~/Scripts/APIScripts/APIController.js"></script>
+    <script src="~/Scripts/APIScripts/MainController.js"></script>
+    <script src="~/Scripts/APIScripts/BooksController.js"></script>
+    <script src="~/Scripts/APIScripts/DialogsController.js"></script>
+    <script src="~/Scripts/APIScripts/Filters/Filters.js"></script>
 
 </head>
 <body>
@@ -39,7 +49,7 @@
             @RenderBody()
             <hr />
             <footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                <p>&copy; @DateTime.Now.Year - Library Application</p>
             </footer>
         </div>
     </div>

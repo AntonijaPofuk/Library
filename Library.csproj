@@ -226,6 +226,7 @@
       <DependentUpon>EntityModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Scripts\APIScripts\BooksController.js" />
     <Compile Include="ViewModels\DepartmentViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -270,9 +271,13 @@
     <Content Include="Scripts\angular-sanitize.min.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\APIScripts\DialogsController.js" />
+    <Content Include="Scripts\APIScripts\DirectivesTemplates\SingleList.html" />
+    <Content Include="Scripts\APIScripts\Filters\Filters.js" />
+    <Content Include="Scripts\APIScripts\MainController.js" />
     <Content Include="Scripts\APIScripts\Service.js" />
     <Content Include="Scripts\APIScripts\Module.js" />
-    <Content Include="Scripts\APIScripts\Controller.js" />
+    <Content Include="Scripts\APIScripts\APIController.js" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\ResourceModel.cshtml" />
@@ -745,6 +750,7 @@
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\Pages\booksISDN.html" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -858,6 +864,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Books\" />
     <Folder Include="Views\DebugLogger\" />
     <Folder Include="Views\DepartmentData\" />
   </ItemGroup>

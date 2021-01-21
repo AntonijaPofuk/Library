@@ -14,29 +14,25 @@
         color: darkslategrey;
         font-weight: bold;
     }
+
+  .active {
+        color: red;
+        font-weight: bolder;
+    }
+
 </style>
-<script>
-
-</script>
 <body data-ng-app="APIModule">
-    <div id="tblSubs" ng-controller="APIController">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="nav">
-                        <a href="#home" class="button">Home</a>
+    <a ui-sref="hello" ui-sref-active="active">Hello</a>
+    <a ui-sref="about" ui-sref-active="active">About</a>
+    <ui-view></ui-view>
 
-                        <a href="#about" class="button">Back</a>
+    <div ng-controller="BooksController">
+    <singlelist mylist="books"></singlelist>
+    <input ng-model="addBook">
+    <button ng-click="addItem(books.list, addBook)">Add This</button>
+    </div>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div ng-view=""></div>
-        </div>
-
+    <div ng-controller="APIController">
         <div class="row">
             <div class="col-sm-6">
                 <h2>Departmens list</h2>
@@ -125,26 +121,26 @@
             </div>
         </div>
         @*<div class="col-sm-12">
-            @using (Html.BeginForm())
-            {
-                <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
-            }
-            <table>
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                </tr>
-                @foreach (var item in Model.Books)
+                @using (Html.BeginForm())
                 {
-                    <tr>
-                        <td>
-                            @item.Name
-                        </td>
-                    </tr>
+                    <p>Find by name: @Html.TextBox("SearchString")<input class="btn btn-danger btn-sm" type="submit" value="Search" /></p>
                 }
-            </table>
-        </div>*@
+                <table>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.Books)
+                    {
+                        <tr>
+                            <td>
+                                @item.Name
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>*@
 
         <div class="col-sm-12">
             <input type="number" class="form-control" placeholder="Input year here" ng-model="priceterm" />

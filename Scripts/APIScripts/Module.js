@@ -1,4 +1,4 @@
 ﻿var app;
 (function () {
-    app = angular.module("APIModule", ["ngRoute"]);
+    app = angular.module("APIModule", ["ngRoute", "ui.router"]);
 })(); 
