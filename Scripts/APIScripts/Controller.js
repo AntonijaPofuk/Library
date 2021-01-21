@@ -9,15 +9,23 @@
             templateUrl: './Scripts/Pages/about.html',
             controller: 'AboutController',
             controllerAs: 'AboutCtrl'
+        }).
+        when('/about', {
+            templateUrl: './Scripts/Pages/about.html',
+            controller: 'AboutController',
+            controllerAs: 'AboutCtrl'
+        }).
+        otherwise({
+            template: "<h1>None</h1><p>Nothing has been selected</p>"
         });
 })
 
 app.controller('HomeController', function () {
-    console.log('2. HomeController loaded!');
+    console.log('--HomeController loaded!--');
 })
 
 app.controller('AboutController', function () {
-    console.log('3. AboutController loaded!');
+    console.log('--AboutController loaded!--');
 });
 
 app.controller('APIController', function ($scope, $log, $filter, APIService, $window, editDialog, editBookDialog, addDialog, addBookDialog) {
@@ -265,7 +273,7 @@ app.directive('editBook', [function () {
 
 app.factory('addDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
     var html = '<add-department sub="sub"></add-department>';
-    var link = $compile(html); 
+    var link = $compile(html);
     return {
         open: function (sub) {
             var scope = $rootScope.$new(true);
