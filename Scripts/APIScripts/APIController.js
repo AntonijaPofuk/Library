@@ -11,10 +11,21 @@
         $scope.bookname = "";
         $scope.bookauthor = "";
         $scope.bookyear = "";
-
     }
 
     $scope.reset();
+
+    $scope.selectedRow = null;  // initialize our variable to null
+    $scope.setClickedRow = function (index) {  //function that sets the value of selectedRow to current index
+        $scope.selectedRow = index;
+    }
+
+
+    $scope.idSelected = null;
+    $scope.setSelected = function (idSelected) {
+        $scope.idSelected = idSelected;
+        console.log(idSelected);
+    }
 
     function getAll() {
         var servCall = APIService.getSubs();

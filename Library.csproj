@@ -273,6 +273,7 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\APIScripts\DialogsController.js" />
     <Content Include="Scripts\APIScripts\DirectivesTemplates\SingleList.html" />
+    <Content Include="Scripts\APIScripts\DirectivesTemplates\TableList.html" />
     <Content Include="Scripts\APIScripts\Filters\Filters.js" />
     <Content Include="Scripts\APIScripts\MainController.js" />
     <Content Include="Scripts\APIScripts\Service.js" />

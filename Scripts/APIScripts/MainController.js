@@ -8,6 +8,17 @@
 	}
 })
 
+
+app.directive('tablelist', function () {
+    return {
+        restrict: 'E',
+        scope: {
+            mylist: '='
+        },
+        templateUrl: 'Scripts/APIScripts/DirectivesTemplates/TableList.html'
+    }
+})
+
 //ui-router
 app.config(function ($stateProvider) {
     var helloState = {

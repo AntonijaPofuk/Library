@@ -27,9 +27,11 @@
     <ui-view></ui-view>
 
     <div ng-controller="BooksController">
-    <singlelist mylist="books"></singlelist>
-    <input ng-model="addBook">
-    <button ng-click="addItem(books.list, addBook)">Add This</button>
+        <singlelist mylist="books"></singlelist>
+        <tablelist mylist="books"></tablelist>
+
+        <input ng-model="addBook">
+        <button ng-click="addItem(books.list, addBook)">Add This</button>
     </div>
 
     <div ng-controller="APIController">
