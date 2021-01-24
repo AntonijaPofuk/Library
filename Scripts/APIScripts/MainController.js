@@ -32,7 +32,6 @@ app.config(function ($stateProvider) {
         url: '/about',
         templateUrl: './Scripts/Pages/about.html'
     }
-
     $stateProvider.state(helloState);
     $stateProvider.state(aboutState);
 });
