@@ -72,6 +72,46 @@ app.directive('editBook', [function () {
 }]);
 
 
+app.factory('editisdnBookDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
+    var html = '<editisdn-book item="item"></editisdn-book>';
+    var link = $compile(html);
+    return {
+        open: function (item) {
+            var scope = $rootScope.$new(true);
+            scope.item = item;
+            var w = $window.open('', '_blank', 'toolbar=0,width=300,height=200');
+            link(scope, function (cloned, scope) {
+                angular.element(w.document.body).append(cloned);
+            });
+        }
+    };
+}]);
+
+
+app.directive('editisdnBook', [function () {
+    return {
+        restrict: 'E',
+        scope: {
+            item: '=',
+        },
+        template: `
+                    <div  ng-controller="BooksController">          
+                    <p>Identificator<input readonly class="form-control" type="text" ng-model="item.ID"></p> 
+                    <p>Name <input class="form-control" type="text" ng-model="item.Name"></p>  
+                    <p>Author <input class="form-control" type="text" ng-model="item.Author"></p>
+                    <p>Year <input class="form-control" type="text" ng-model="item.Year"></p>                   
+                     Departmen: {{item.Department=selectedDeparts.ID}}
+                    <p>Select a department:</p>                 
+                     <select ng-model="selectedDeparts">
+                    <option data-ng-repeat="x in subscriber" ng-model="sub.Department" ng-value="{{x}}">{{x.Name}}</option>
+                    </select>  
+                <button type="button" class="btn btn-success btn-sm" data-ng-click="updBook(item);">Submit</button>
+                    </div>
+   `,
+    };
+}]);
+
+
 app.factory('addDialog', ['$rootScope', '$compile', '$window', function ($rootScope, $compile, $window) {
     var html = '<add-department sub="sub"></add-department>';
     var link = $compile(html);

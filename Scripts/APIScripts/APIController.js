@@ -1,4 +1,4 @@
-﻿app.controller('APIController', function ($scope, $log, $filter, APIService, $window, editDialog, editBookDialog, addDialog, addBookDialog) {
+﻿app.controller('APIController', function ($scope, $log, $filter, APIService, $window, editDialog, editBookDialog, editisdnBookDialog, addDialog, addBookDialog) {
 
     getAll();
     getAllBooks();
@@ -6,6 +6,8 @@
     $scope.editBookDialog = editBookDialog;
     $scope.addDialog = addDialog;
     $scope.addBookDialog = addBookDialog;
+    $scope.editisdnBookDialog = editisdnBookDialog;
+
 
     $scope.reset = function () {
         $scope.bookname = "";
@@ -47,6 +49,7 @@
         }
         );
     }
+
 
     $scope.saveSubs = function () {
         var sub = {
